@@ -124,8 +124,8 @@ footer {
                 <p>{{name}} - Selected tables are already booked.</p>
             </div>
         {% endif %}
-        <br><a href="http://127.0.0.1:8000/order_check/{{username}}" class="order_check">check orders booked</a><br><br>
-        <a href="http://127.0.0.1:8000/res_tab_check/{{username}}" class="reserved_tab_check">check tabels booked</a>
+        <br><a href="order_check/{{username}}" class="order_check">check orders booked</a><br><br>
+        <a href="res_tab_check/{{username}}" class="reserved_tab_check">check tabels booked</a>
     </div>
     <script>
         console.log('{{log_name.username}}')
