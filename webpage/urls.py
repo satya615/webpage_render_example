@@ -26,7 +26,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     
     path('signup/', views.singup),
-    path('login/', views.login),
+    path('login/', views.user_login),
     path('', views.home),
   
      path('admin/', admin.site.urls), 
@@ -34,7 +34,7 @@ urlpatterns = [
     
      
        path('sinup/',views.singup),
-        path('login/',views.login),
+        path('login/',views.user_login),
         path('res/<name>',views.my_view1),
         path('res_tab_check/<name>',views.tab_check),#reservation
          path('home/',views.home),
