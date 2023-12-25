@@ -1,0 +1,308 @@
+{% load custom_filters %}
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/x-icon" href="{% static 'logo.jpg' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <style>
+        header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+}
+.main{
+            float:left;
+        }
+.header-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-container img {
+    width: 50px; /* Adjust the logo size as needed */
+    margin-right: 10px;
+}
+
+/* Footer styles */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+    
+        .container {
+            margin: 20px;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+            display: inline-block;
+            position: relative;
+            transition: transform 0.3s ease-in-out;
+        }
+    
+        .container:hover {
+            transform: scale(1.05);
+        }
+    
+        .item {
+            margin: 5px;
+            border-radius: 10px;
+            transition: transform 0.2s ease-out;
+            border: 2px solid #333;
+            width: 260px;
+            overflow: hidden;
+            position: relative;
+        }
+    
+        .item:hover {
+            transform: scale(1.05);
+        }
+    
+        .item img {
+            width: 100%;
+            height: 220px;
+            display: block;
+        }
+    
+        .details {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+    
+        .item:hover .details {
+            opacity: 1;
+        }
+    
+        .item_name {
+            font-size: 18px;
+            margin: 0;
+            color: #333;
+        }
+    
+        .price {
+            font-size: 16px;
+            margin: 0;
+            color: #e74c3c;
+        }
+        .add{
+            float:right;
+        }
+        .remove{
+            float:left;
+        }
+       
+    
+        .add,
+        .remove {
+            background-color: #3498db;
+            border: none;
+            color: #fff;
+            font-size: 18px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+    
+        .add:hover,
+        .remove:hover {
+            background-color: #e74c3c;
+        }
+    
+        .count {
+            width: 80px;
+            margin: 0 10px;
+            font-size: 18px;
+            text-align: center;
+            margin-left: 64px;
+        }
+    
+        button[type="submit"] {
+            background-color: #27ae60;
+            border: none;
+            color: #fff;
+            font-size: 18px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            float:right;
+            margin-right: 50px;
+            transition: background-color 0.3s ease-in-out;
+        }
+        .order_check{
+            display:flex;
+            justify-content: end;
+            margin-right: 20px;
+        }
+        
+        button[type="submit"]:hover {
+            background-color: #1e8449;
+            
+        }
+        #menu_items{
+            margin-left: 20px;
+        }
+       
+    </style>
+    
+    
+</head>
+<body>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <header>
+            <div class="header-container">
+                <img src="{% static 'logo.jpg' %}" alt="Logo">
+                <h1 class="main">Menu</h1>
+            </div>
+        </header>
+        
+        
+        {% for i in tab %}
+        {% if i in title_num %}
+        <h3 id="menu_items">{{ title_num|get_item:i }}</h3>
+        {% endif %}
+<div class="container" id="container{{ i }}">
+            <div class="item"  >
+              
+                {% with images|get_item:i as image %}
+                <img src="{{ image }}" alt="img">
+                {% endwith %}
+                
+                <div class="details">
+                  <b> <p class="item_name">{{ forms|get_item:i }}</p>
+                    <p class="price">${{ price|get_item:i }}</p></b>
+                    
+                </div>
+            </div>
+           <img class="add" onclick="fun('{{i}}')" src="{% static 'add-1-icon--flatastic-1-iconset--custom-icon-design-0.png' %}" alt="img">
+          
+            <input class="count" id="count{{ i }}" placeholder="Quantity" readonly>
+            <img class="remove" onclick="func('{{i}}')" src="{% static 'remove-151678_960_720.png' %}" alt="img">
+        </div>
+         {% endfor %}
+        <input type="hidden" name="Array" id="Array" required>
+        <input type="hidden" name="count" id="count" required>
+        <br><button type="submit">submit</button> <br> <br>
+        <br><a href="http://127.0.0.1:8000/order_check/{{username}}" class="order_check">check orders booked</a><br>
+        <script>
+            let t='{{title}}'
+            let tab='{{tab}}'
+            console.log(t)
+            console.log('{{image}}')
+            console.log('{{price}}')
+             let dataArray = [];
+             let dataArray1 = [];
+            function updateDataList() {
+                const dataListInput = document.getElementById("Array");
+                dataListInput.value = ' '
+                dataListInput.value= JSON.stringify(dataArray);
+                const dataListInpu = document.getElementById("count");
+                dataListInpu.value = ' '
+                dataListInpu.value=JSON.stringify(dataArray1);
+                
+            }
+            let counts = {}; 
+            
+            let a
+            function fun(a) {
+              if (!(a in counts)) {
+                  counts[a] = 0;
+                   }
+                   dataArray=[];
+                   dataArray1=[]
+                   counts[a]++; 
+                   updateCountDisplay(a);
+                   console.log(counts);
+                   for (const key in counts) {
+                            if (counts.hasOwnProperty(key)) {
+                            dataArray.push(key);      
+                            dataArray1.push(counts[key]);  
+                            updateDataList();
+                         }
+}
+               }
+             
+// function func(a) {
+//     if (counts[a] > 0) {
+//         counts[a]--;
+//         updateCountDisplay(a);
+//     }
+    
+//     // Remove the item from the arrays if its count becomes 0
+//     if (counts[a] === 0) {
+//         const index = dataArray.indexOf(a);
+//         if (index !== -1) {
+//             dataArray.splice(index, 1);
+//             dataArray1.splice(index, 1);
+//             updateDataList();
+//         }
+//     }
+// }
+
+            //    a = Number(a) + 1;
+            //    a = String(a);
+                  function updateCountDisplay(a) {
+    
+                     let k = document.querySelector('#count' + a);
+                      k.value = counts[a];
+                }
+                function func(a) {
+    if (counts[a] > 0) {
+        counts[a]--;
+        updateCountDisplay(a);
+    } else {
+        counts[a] = 0;
+    }
+
+    // Update the item in the arrays, or remove it if its count becomes 0
+    const index = dataArray.indexOf(a);
+    if (index !== -1) {
+        dataArray1[index] = counts[a];
+        updateDataList();
+    }
+}
+        </script>
+        
+        <footer>
+            <div class="footer-container">
+                <p>&copy; 2023 Take It Cheesy. All rights reserved.</p>
+            </div>
+        </footer>
+    </form>
+</body>
+</html>

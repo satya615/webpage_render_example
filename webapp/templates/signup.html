@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <title>Attractive Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: white;
+            background-image: url('{% static "3.jpg" %}'); /* Add your background image here */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 350px;
+            background-color: transparent;
+            padding: 20px;
+            
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(244, 217, 217, 0.3);
+        }
+        div{
+            padding: 10px;
+            
+        }
+        h2 {
+            text-align: center;
+            color: white;
+        }
+        label, input {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="text"], input[type="password"] {
+            width: 95%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .error {
+            text-align: center;
+            color: #FF3333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Singup</h2>
+        <form id="signupForm" method="POST">
+            {% csrf_token %}
+            {% if error %}
+            <font color="red"><b><p>Already Registerd Using This Mail</p></b></font>
+            {% endif %}
+            {{ form.as_p }}
+            <button type="submit">Register</button>
+        </form>
+       
+    </div>
+    
+   
+</body>
+</html>

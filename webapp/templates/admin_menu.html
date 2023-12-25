@@ -1,0 +1,61 @@
+{% load static %}
+<html>
+    <head>
+        <link rel="icon" type="image/x-icon" href="{% static 'admin.webp' %}">
+        <title>
+            admin menu entry
+        </title>
+        <style>
+            body{
+                background-image: url('{% static "color.jpg" %}');
+                background-repeat: no-repeat;
+                background-size:cover;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            div{
+                border: 5px solid rgb(194, 11, 69);
+                width: 300px;
+                height:auto;
+                background-color: lightgray;
+               /* background-image: url('downloadorg.jpeg');
+                background-repeat: no-repeat;
+                background-size:cover;*/
+                opacity: 1;
+                color:black;
+                font-size:larger;
+            }
+            button{
+                margin-bottom: 10px;
+                background-color: chartreuse;
+            }
+        </style>
+    </head>
+    <body>
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <center>
+        <div>
+            {% if error %}
+           <b><font color="red"> <p>please enter correct item type</p></font></b>
+           {% endif %}
+            <h4>Menu</h4>
+            
+            
+         
+           <center> {{ form.as_p }}</center>
+    <button type="submit">Submit</button>
+</div>
+</center>
+<script>
+    let length='{{length}}'
+    console.log(length)
+    let k=document.getElementById('id_num');
+    k.value=Number(length)
+</script>
+</form>
+
+</body>
+</html>

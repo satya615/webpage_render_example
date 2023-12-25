@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 800px;
+        }
+        .tabels {
+            display:flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .table {
+            width: 50px;
+            height: 40px;
+            margin: 10px;
+            border: 2px solid rgb(2, 255, 2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.3s ease-out;
+           
+        }
+        .table:hover {
+            transform: scale(1.1);
+        }
+       
+        .booked {
+            width: 50px;
+            height: 40px;
+            margin: 10px;
+            border: 2px solid rgb(251, 148, 3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: not-allowed;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button[type="submit"]:hover {
+            background-color: #44d84b;
+        }
+        header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    height:40px;
+}
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+}
+.header{
+    margin-top: 5px;;
+}
+.reserved_tab_check{
+    display:flex;
+    justify-content: center;
+}
+.order_check{
+    
+}
+    </style>
+</head>
+<body>
+    <header>
+        <font size="6px"> <center class="header">Reservation</center></font>
+       
+    </header>
+    <div class="container">
+        <form action="" method="POST">
+            {% csrf_token %}
+           <label for="date" >date</label>
+            <input id="date" name="date" type="datetime-local" required>
+            <div class="tabels">
+                {% for i in tab %}
+                    {% if i|stringformat:"s" in forms %}
+                        <div class="booked" >{{i}}</div>
+                    {% else %}
+                        <div class="table" id='tabel' onclick="fun('{{i}}')">{{i}}</div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <input type="hidden" name="dataArray" id="data-list-input">
+            <button type="submit">Submit</button>
+        </form>
+       
+        {% if error %}
+            <div class="error-message">
+                <p>{{name}} - Selected tables are already booked.</p>
+            </div>
+        {% endif %}
+        <br><a href="http://127.0.0.1:8000/order_check/{{username}}" class="order_check">check orders booked</a><br><br>
+        <a href="http://127.0.0.1:8000/res_tab_check/{{username}}" class="reserved_tab_check">check tabels booked</a>
+    </div>
+    <script>
+        console.log('{{log_name.username}}')
+        document.addEventListener("DOMContentLoaded", function() {
+    const elementsToClick = document.querySelectorAll(".table");
+
+    elementsToClick.forEach(function(element) {
+        element.addEventListener("click", function() {
+            if (!element.classList.contains("clicked")) {
+                element.style.backgroundColor = "#44d84b"; 
+                element.classList.add("clicked");
+            } else {
+                element.style.backgroundColor = "#f0f0f0"; 
+                element.classList.remove("clicked");
+            }
+        });
+    });
+});
+
+
+        let dataArray = [];
+        function updateDataList() {
+            const dataListInput = document.getElementById("data-list-input");
+            dataListInput.value = JSON.stringify(dataArray);
+        }
+        function fun(a) {
+            dataArray.push(a);
+            updateDataList();
+            console.log(dataArray);
+        }
+        updateDataList();
+    </script>
+    
+</body>
+</html>

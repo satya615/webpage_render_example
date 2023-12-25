@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOOKED</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #322e2e;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .username {
+            color: green;
+            font-weight: bold;
+        }
+
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin: 20px auto;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: rgb(202, 236, 151);
+            font-weight: bold;
+        }
+        tr.totall{
+            border: 2px solid green;
+            border-radius: 3px;
+        }
+        .total{
+            color:orange;
+        }
+        .input{
+            background-color: lawngreen;
+            width: 140px;
+            height: 50px;
+            border-radius: 6px;
+
+        }
+        .input:hover{
+            width:160px;
+            height: 60px;
+            background-color: rgb(13, 198, 13);
+            color: white;
+        }
+    
+    </style>
+</head>
+
+<body>
+    
+    <div class="header">
+        <h1 class="head">Reserved</h1>
+    </div>
+
+    <p>Username: <span class="username">{{name}}</span></p>
+    <center><b>BOOKED TABELS</b></center>
+    <table>
+        <thead>
+            <tr>
+                <th>Booked Tables</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in book %}
+                <tr>
+                    <td>{{ i.num }}</td>
+                    <td>{{ i.date }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    
+
+
+
+   
+</body>
+
+
+</html>

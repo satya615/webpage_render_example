@@ -1,0 +1,192 @@
+{% load static %}
+{% load custom_filters %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ORDERS</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #322e2e;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .username {
+            color: green;
+            font-weight: bold;
+        }
+
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin: 20px auto;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0.2, 0, 0, 0.1);
+            border:1.8px solid black;
+        }
+      
+
+        th, td {
+            border: 1px solid #e7d1d1;
+            padding: 12px;
+            text-align: center;
+        }
+        th{
+            background-color: lightgreen;
+        }
+
+        
+        tr.totall{
+            border: 2px solid green;
+            border-radius: 3px;
+        }
+        .total{
+            color:orange;
+        }
+        .input{
+            background-color: lawngreen;
+            width: 140px;
+            height: 50px;
+            border-radius: 6px;
+
+        }
+        .input:hover{
+            width:160px;
+            height: 60px;
+            background-color: rgb(13, 198, 13);
+            color: rgb(231, 228, 228);
+        }
+        .razor-pay{
+         display:flex;
+         justify-content: center;
+         align-items: center;           
+           
+        }
+        .paid{
+            border: 2px solid black;
+            padding :5px;
+            background-color: greenyellow;
+            width:max-content;
+            display: flex;
+            justify-content: center;
+            align-items: center     ;
+            margin: 0 auto;
+        }
+        script.pay{
+            display: block;
+            margin: 0 auto;
+        }
+        td.nobor{
+            border:none;
+            display:flex;
+            justify-content: end;
+           
+        }
+    </style>        
+</head>
+{% if log == 0 %}
+<body>
+    <form action="" method="POST">
+        {% csrf_token %}
+    <div class="header">
+        <h1 class="head">Reserved</h1>
+    </div>
+
+    <p>Username: <span class="username">{{name}}</span></p>
+    <center><b>ORDERED ITEMS</b></center>
+    <table>
+        <thead>
+            <tr>
+                <th>Items</th>
+                <th>Price(per 1 piece)</th>
+                
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in b %}
+                <tr>
+                    <td>{{ item.items }}</td>
+                    <td>{{ item.price }}$</td>
+                    <td>{{ item.count }}</td>
+                </tr>
+            {% endfor %}
+            <tr class="totall">
+                <b><td>TOTAL</td></b>
+                <td class="total">
+                   <b> {{a}}$</b>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+      
+
+        <script src="https://checkout.razorpay.com/v1/checkout.js" 
+        data-key="rzp_test_mkEAnH2fj4QnO2"
+        data-amount="{{ mount }}"
+        data-currency="INR" 
+        data-order_id="{{payment.id}}" 
+        data-buttontext="Pay with Razorpay"
+        data-name="{{name}}" 
+        data-description="Ordered items"
+        data-image="{% static 'admin.webp' %}" 
+        data-prefill.name="{{name}}" 
+        data-prefill.email="tkitchse@gmail.com"
+        data-prefill.csrf_token="{% csrf_token %}"
+        data-theme.color="#13c613"></script>
+     
+    
+    
+</form>
+
+
+   
+</body>
+{% endif %}
+
+    {% if log > 0 %}
+    <body class="after">
+<div class="header">
+    <h1 class="head">Receipt</h1>
+</div>
+
+<p>Username: <span class="username">{{name}}</span></p>
+
+
+
+<center><b>Bill</b></center>
+<table>
+    {% for i in payment1 %}
+    <tr>
+       
+        {% if i in fil %}
+        
+            {% if payment1|get_item:i == mount %}
+            <th>{{ i }}</th> <td>{{ mount|calculate_amount }}</td>
+            
+            {% else %}
+            <th>{{ i }}</th> <td>{{ payment1|get_item:i }}</td>
+            {% endif %}
+        {% endif %}
+    </tr>
+{% endfor %}
+    
+    </table>
+    
+<div class="paid"><b >Paid</b></div>
+
+</body>
+    {% endif %}
+
+</html>

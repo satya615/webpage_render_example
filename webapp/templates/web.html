@@ -1,0 +1,301 @@
+
+<html>
+<head>
+    {% load static %}
+    <title>Restaurant Management</title>
+    <style>
+        
+body, h1, h2, h3, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+   
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.logo img {
+    max-width: 80px;
+}
+
+#hero {
+    position: relative;
+    height: 400px;
+    text-align: center;
+    color: white;
+}
+
+.background-image img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+   
+}
+
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+   
+}
+
+.hero-content h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.hero-content p {
+    font-size: 18px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+section {
+    background-color: none;
+    padding: 40px;
+    margin: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+   
+}
+
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+}
+center{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    font-size:xx-large;
+    margin-left: 100px;
+}
+.items{
+    border:2px solid black;
+    width:200px;
+    height: 200px;
+    padding: 5px;
+    border-radius: 3px;
+   transition: 1s;
+    overflow: hidden;
+    margin-top: 30px;
+   
+    
+}
+.items:hover img {
+  transform: scale(1.2,1.2); 
+  
+}
+#menu{
+    display:flex;
+}
+#about {
+            background-color: #fff; /* Set background color */
+            padding: 40px; /* Add padding for content */
+            border-radius: 10px; /* Add border radius for a rounded appearance */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: justify; /* Justify text for better readability */
+            line-height: 1.6; /* Increase line height for better spacing */
+            font-size: 16px; /* Set font size */
+            color: #333; /* Set text color */
+        }
+
+        #about h2 {
+            color: #333; /* Set heading color */
+            font-size: 28px; /* Set heading font size */
+            margin-bottom: 20px; /* Add margin below heading */
+        }
+        svg{
+            width:20px;
+            height: 20px;
+            padding:3px;
+        }
+        li a:hover {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-list {
+            background-color: rgb(253, 252, 252);
+            position: absolute;
+            display: none;
+            width: max-content;
+            margin: 0px;
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            top: 100%; 
+            left: 0; 
+            z-index: 1;
+           
+        }
+
+        .dropdown-list a {
+            display: block;
+            color: black;
+            padding: 10px;
+            margin: 0%;
+            margin-right: 7px;
+            text-decoration: none;
+            color: #333;
+            
+        }
+
+        .dropdown:hover .dropdown-list {
+            display: block;
+        }
+        .high:hover{
+            color:lightsalmon;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="{% static 'logo.jpg' %}" alt="Restaurant Logo">
+            </div>
+            <center>Take It Cheesy</center>
+            <ul>
+                <li onclick="login1()"><a href="#" class="high">Menu</a></li>
+                <li onclick="login()"><a href="#" class="high">Reservations</a></li>
+                <li><a href="#staff">Staff</a></li>
+                <li><a href="#contact">Contact</a></li>
+                {% if log == '0' %}
+                 <li><a href="http://127.0.0.1:8000/login/" class="high">Login</a></li>
+                {% else %}
+                
+                <li class="dropdown"><a href="#"> {{name.username}}</a>
+                <div class="dropdown-list">
+                    <a href="http://127.0.0.1:8000/home/">Logout</a>
+                    <a href="#">Profile</a>
+                </div>  </li>
+                 {% endif %}
+
+            </ul>
+        </nav>
+    </header>
+    
+    <section id="hero">
+        <div class="background-image">
+           <img src="{% static 'pizza.jpg' %}" alt="Food Background">
+        </div>
+        <div class="hero-content">
+            <h1>Welcome to Our Restaurant</h1>
+            <p>Discover a world of flavors with our exquisite dishes.</p>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2>About Us</h2>
+        <p>"Take It Cheesy" is a renowned restaurant that has been tantalizing taste buds since its inception in 2008. Nestled in the heart of a bustling city, this culinary gem has consistently delivered an exceptional dining experience for over a decade.
+
+            Founded by passionate food enthusiasts, the restaurant was envisioned as a haven for cheese lovers. Its warm and inviting ambiance, complete with rustic décor and dimmed lighting, creates the perfect setting for a cozy meal. From couples celebrating anniversaries to families sharing quality time, Take It Cheesy caters to a diverse clientele.<br>
+            
+            The menu at Take It Cheesy is nothing short of a cheese lover's dream come true. Their signature dishes include delectable cheese fondues, creamy macaroni and cheese, and mouthwatering grilled cheese sandwiches. Each dish is prepared with utmost care and features a selection of high-quality cheeses from around the world.<br>
+            
+            What truly sets Take It Cheesy apart is its commitment to sourcing local and organic ingredients. From artisanal cheeses to farm-fresh produce, the restaurant prioritizes sustainability and supports local farmers and producers.
+            
+            The skilled chefs at Take It Cheesy continually experiment with unique cheese-infused creations, ensuring that the menu stays fresh and exciting. Seasonal specials, such as truffle-infused cheese dishes in winter and fresh fruit-infused cheese plates in summer, keep patrons eagerly returning for more.
+            
+            The restaurant's exceptional service further enhances the dining experience. The staff is not only attentive but also well-versed in the nuances of cheese, readily offering recommendations and pairings to enhance every customer's visit.
+            
+            For wine and beer enthusiasts, Take It Cheesy boasts an impressive selection of beverages that perfectly complement their cheese-centric dishes. The expertly curated drink menu includes local craft beers, fine wines, and a range of non-alcoholic options.
+            <br>
+            Over the years, Take It Cheesy has garnered numerous awards and accolades for its dedication to culinary excellence. It has become a go-to destination for cheese aficionados and food critics alike, earning a reputation as one of the city's must-visit dining establishments.
+            
+            In addition to its dine-in experience, Take It Cheesy also offers catering services, making it the ideal choice for events, parties, and gatherings. The restaurant's catering menu features a wide array of cheese platters, fondues, and other crowd-pleasing delights.
+            
+            Beyond its culinary prowess, Take It Cheesy has also demonstrated a strong commitment to community engagement. The restaurant regularly sponsors cheese-tasting events, fundraisers, and educational workshops to share their passion for cheese with the local community.
+            <br>
+            As Take It Cheesy celebrates its 15th anniversary, it continues to evolve and innovate, solidifying its status as a beloved culinary institution in the city. Whether you're a cheese connoisseur or simply looking for a memorable dining experience, Take It Cheesy remains the ultimate destination for indulging in the cheesy pleasures of life.</p>
+    </section>
+
+   
+    
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <p>If you have any questions or feedback, please feel free to reach out to us:</p>
+        <address>
+            <p>Email: <a href="mailto:info@example.com">info@example.com</a></p>
+            <p>Phone: <a href="tel:+123456789">+123-456-789</a></p>
+            <p>Address: 123 Restaurant St, City, Country</p>
+        </address>
+    </section>
+    <script>
+        let log="{{log}}"
+        function login(){
+            if(log=='0'){
+                alert('please login')
+            }
+            else{
+                window.location.href = "http://127.0.0.1:8000/res/{{name.username}}";
+            }
+        }
+        function login1(){
+            if(log=='0'){
+                alert('please login')
+            }
+            else{
+                window.location.href = "http://127.0.0.1:8000/menu/{{name.username}}";
+            }
+        }
+    </script>
+    
+    <footer>
+        <p>&copy; 2023 Take It Cheesy</p>
+    </footer>
+</body>
+</html>
