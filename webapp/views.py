@@ -23,59 +23,59 @@ def singup(request):
 
 from django.contrib.auth.hashers import make_password, check_password
 
-# Rename login view to avoid conflict with built-in login function
-def user_login(request):
-    if request.method == 'POST':
-        form = log_in(request.POST)
-        if form.is_valid():
-            name = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            try:
-                user = Login.objects.get(username=name)
-                if check_password(password, user.password):
-                    return render(request, 'web.html', {'log': '1', 'name': user})
-                else:
-                    form = log_in()
-                    error = 'Invalid password'
-                    return render(request, 'login.html', {'error': error, 'form': form})
-            except Login.DoesNotExist:
-                form = log_in()
-                error = 'User does not exist'
-                return render(request, 'login.html', {'error': error, 'form': form})
-        else:
-            form = log_in()
-            # Handle form validation errors
-            return render(request, 'login.html', {'form': form})
-
-    else:
-        form = log_in()
-    return render(request, 'login.html', {'form': form})
-# def login(request):
+# # Rename login view to avoid conflict with built-in login function
+# def user_login(request):
 #     if request.method == 'POST':
 #         form = log_in(request.POST)
 #         if form.is_valid():
-#             name=form.cleaned_data['username']
-#             password=form.cleaned_data['password']
+#             name = form.cleaned_data['username']
+#             password = form.cleaned_data['password']
 #             try:
-#                a=Login.objects.get(username=name)
-#                if(a.password==password):
-#                  return render(request,'web.html',{'log':'1','name':a})
-#                else:
+#                 user = Login.objects.get(username=name)
+#                 if check_password(password, user.password):
+#                     return render(request, 'web.html', {'log': '1', 'name': user})
+#                 else:
+#                     form = log_in()
+#                     error = 'Invalid password'
+#                     return render(request, 'login.html', {'error': error, 'form': form})
+#             except Login.DoesNotExist:
 #                 form = log_in()
-#                 error='error'
-#                 return render(request,'login.html',{'error':error,'form':form})
-#             except ObjectDoesNotExist:
-#                 form = log_in()
-#                 error='error'
-#                 return render(request,'login.html',{'error':error,'form':form}) 
+#                 error = 'User does not exist'
+#                 return render(request, 'login.html', {'error': error, 'form': form})
 #         else:
 #             form = log_in()
-#             error='error'
-#             return render(request,'login.html',{'error1':error,'form':form}) 
-                
+#             # Handle form validation errors
+#             return render(request, 'login.html', {'form': form})
+
 #     else:
 #         form = log_in()
-    # return render(request, 'login.html', {'form': form})
+#     return render(request, 'login.html', {'form': form})
+def login(request):
+    if request.method == 'POST':
+        form = log_in(request.POST)
+        if form.is_valid():
+            name=form.cleaned_data['username']
+            password=form.cleaned_data['password']
+            try:
+               a=Login.objects.get(username=name)
+               if(a.password==password):
+                 return render(request,'web.html',{'log':'1','name':a})
+               else:
+                form = log_in()
+                error='error'
+                return render(request,'login.html',{'error':error,'form':form})
+            except ObjectDoesNotExist:
+                form = log_in()
+                error='error'
+                return render(request,'login.html',{'error':error,'form':form}) 
+        else:
+            form = log_in()
+            error='error'
+            return render(request,'login.html',{'error1':error,'form':form}) 
+                
+    else:
+        form = log_in()
+    return render(request, 'login.html', {'form': form})
 import json  #reservation
 from collections import Counter
 def my_view1(request,name):
