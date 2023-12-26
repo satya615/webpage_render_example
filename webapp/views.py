@@ -50,7 +50,7 @@ from django.contrib.auth.hashers import make_password, check_password
 #     else:
 #         form = log_in()
 #     return render(request, 'login.html', {'form': form})
-def login(request):
+def user_login(request):
     if request.method == 'POST':
         form = log_in(request.POST)
         if form.is_valid():
