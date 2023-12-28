@@ -89,7 +89,7 @@ DATABASES = {
 }
 
 database_url = os.environ.get("DATABASE_URL")
-DATABASES["default"] = dj_database_url.parse(database_url)
+DATABASES["default"] = dj_database_url.parse("postgres://webpage_example_render_user:vmDTUJz2yg38Bwao34zqKPOtHlwNMrVI@dpg-cm4j63fqd2ns73ekj8ig-a.oregon-postgres.render.com/webpage_example_render")
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -130,6 +130,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')  # The absolute filesystem path to
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
