@@ -10,7 +10,7 @@ def singup(request):
         if form.is_valid():
             name=form.cleaned_data['username']
             try:
-               a=Login.objects.get(username=name)
+               a=Userlogin.objects.get(username=name)
                if(a.username==name):
                    form=Loginform()
                    error='error'
@@ -57,7 +57,7 @@ def login(request):
             name=form.cleaned_data['username']
             password=form.cleaned_data['password']
             try:
-               a=Login.objects.get(username=name)
+               a=Userlogin.objects.get(username=name)
                if(a.password==password):
                  return render(request,'web.html',{'log':'1','name':a})
                else:

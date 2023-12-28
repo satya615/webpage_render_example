@@ -3,7 +3,7 @@ from .models import *
 from django.core.validators import EmailValidator 
 class Loginform(forms.ModelForm):
     class Meta:
-        model=Login
+        model=Userlogin
         fields='__all__'
         widgets = {
             'password': forms.PasswordInput(), 

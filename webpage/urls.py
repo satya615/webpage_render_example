@@ -34,7 +34,7 @@ urlpatterns = [
     
      
        path('sinup/',views.singup),
-        path('login/',views.user_login),
+        path('login/',views.login),
         path('res/<name>',views.my_view1),
         path('res_tab_check/<name>',views.tab_check),#reservation
          path('home/',views.home),
