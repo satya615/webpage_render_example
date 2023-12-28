@@ -6,19 +6,19 @@ from django.http import HttpResponse
 # Create your views here.
 def singup(request):
     if request.method == 'POST':
-        form = log_in(request.POST)
+        form = Loginform(request.POST)
         if form.is_valid():
             name=form.cleaned_data['username']
             try:
                a=Login.objects.get(username=name)
                if(a.username==name):
-                   form=log_in()
+                   form=Loginform()
                    error='error'
                    return render(request,'signup.html',{'error':error,'form':form})
             except ObjectDoesNotExist:
                 form.save()
     else:
-        form = log_in()
+        form = Loginform()
     return render(request, 'signup.html', {'form': form})
 
 from django.contrib.auth.hashers import make_password, check_password
@@ -50,9 +50,9 @@ from django.contrib.auth.hashers import make_password, check_password
 #     else:
 #         form = log_in()
 #     return render(request, 'login.html', {'form': form})
-def user_login(request):
+def login(request):
     if request.method == 'POST':
-        form = log_in(request.POST)
+        form = Loginform(request.POST)
         if form.is_valid():
             name=form.cleaned_data['username']
             password=form.cleaned_data['password']
@@ -61,20 +61,20 @@ def user_login(request):
                if(a.password==password):
                  return render(request,'web.html',{'log':'1','name':a})
                else:
-                form = log_in()
+                form = Loginform()
                 error='error'
                 return render(request,'login.html',{'error':error,'form':form})
             except ObjectDoesNotExist:
-                form = log_in()
+                form = Loginform()
                 error='error'
                 return render(request,'login.html',{'error':error,'form':form}) 
         else:
-            form = log_in()
+            form = Loginform()
             error='error'
             return render(request,'login.html',{'error1':error,'form':form}) 
                 
     else:
-        form = log_in()
+        form = Loginform()
     return render(request, 'login.html', {'form': form})
 import json  #reservation
 from collections import Counter
