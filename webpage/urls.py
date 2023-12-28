@@ -31,9 +31,9 @@ urlpatterns = [
   
      path('admin/', admin.site.urls), 
         path('res/<name>',views.my_view1),
-        path('/res_tab_check/<name>',views.tab_check),#reservation
+        path('res_tab_check/<name>',views.tab_check),#reservation
          path('home/',views.home),
-          path('/menu/<name>',views.menu,name="menu"),# path('menu/',views.newmenu,name="menu"),
+          path('menu/<name>',views.menu,name="menu"),# path('menu/',views.newmenu,name="menu"),
           
          path('adminmenu/',views.admin),
            path('order_check/<name>',views.order_check),
