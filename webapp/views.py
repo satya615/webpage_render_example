@@ -206,8 +206,9 @@ def admin(request):
                 form.save()
                 a=admin_menu()
                 num= Menu.objects.values_list('num', flat=True)
-                length = int(num.last())
-                if(length>=0):
+                
+                if(int(num.last())>=0):
+                    length = int(num.last())
                     return render(request,'admin_menu.html',{'form':a,'length':length+1})
                 else:
                     length=0
