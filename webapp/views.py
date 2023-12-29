@@ -207,13 +207,21 @@ def admin(request):
                 a=admin_menu()
                 num= Menu.objects.values_list('num', flat=True)
                 length = int(num.last())
-                return render(request,'admin_menu.html',{'form':a,'length':length+1})
+                if(length>=0):
+                    return render(request,'admin_menu.html',{'form':a,'length':length+1})
+                else:
+                    length=0
+                    return render(request,'admin_menu.html',{'form':a,'length':length+1})
             else:
                 #  a=admin_menu()
                  error='error'
                  num= Menu.objects.values_list('num', flat=True)
                  length = int(num.last())
-                 return render(request,'admin_menu.html',{'form':form,'error':error,'length':length+1})    
+                 if(length>=0):
+                    return render(request,'admin_menu.html',{'form':a,'length':length+1})
+                 else:
+                    length=0
+                    return render(request,'admin_menu.html',{'form':a,'length':length+1})    
            
         return HttpResponse("error")
     else:
