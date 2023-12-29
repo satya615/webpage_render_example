@@ -229,8 +229,12 @@ def admin(request):
     else:
         a=admin_menu()     
         num= Menu.objects.values_list('num', flat=True)
-        length = int(num.last())
-        return render(request,'admin_menu.html',{'form':a,'length':length+1})
+        if num:
+            length = int(num.last())
+            return render(request,'admin_menu.html',{'form':a,'length':length+1})
+        else:
+            length=0
+            return render(request,'admin_menu.html',{'form':a,'length':length+1})
         #   names=Menu.objects.values_list('item_type',flat=True)
         #   return JsonResponse({'menu_num': names})
     
