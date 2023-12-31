@@ -194,7 +194,7 @@ def admin(request):
     if request.method=='POST':
         form=admin_menu(request.POST,request.FILES)
         if form.is_valid():
-            names=['Appetizer','Salads','Main Courses','Sandwiches and Wraps','Vegetarian/Vegan options','Side Dishes','Desserts','Beverages','Kids Menu','Specials']
+            names=['appetizer','salads','main courses','sandwiches and wraps','vegetarian/vegan options','side Dishes','desserts','beverages','kids menu','specials']
             items=form.cleaned_data['item_type']
             # num=form.cleaned_data['num']     #fields=["items","price","item_type","image"]
             # price=form.cleaned_data['price']
