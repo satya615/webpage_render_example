@@ -176,7 +176,10 @@ footer {
         #menu_items{
             margin-left: 20px;
         }
-       
+       .imagesmen{
+        display:flex;
+        flex-wrap: wrap;
+       }
     </style>
     
     
@@ -200,7 +203,7 @@ footer {
             <div class="item"  >
               
                 {% with images|get_item:i as image %}
-                <img src="{{ image }}" alt="img">
+                <img class="imagesmen" src="{{ image }}" alt="img">
                 {% endwith %}
                 
                 <div class="details">
