@@ -214,7 +214,7 @@ def admin(request):
                     length=0
                     return render(request,'admin_menu.html',{'form':a,'length':length+1})
             else:
-                #  a=admin_menu()
+               
                  error='error'
                  num= Menu.objects.values_list('num', flat=True)
                  
