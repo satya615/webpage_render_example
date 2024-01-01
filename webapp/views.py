@@ -23,7 +23,7 @@ def singup(request):
 
 from django.contrib.auth.hashers import make_password, check_password
 
-
+# # Rename login view to avoid conflict with built-in login function
 # def user_login(request):
 #     if request.method == 'POST':
 #         form = log_in(request.POST)
