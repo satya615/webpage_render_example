@@ -104,6 +104,11 @@ footer {
     <div class="container">
         <form action="" method="POST">
             {% csrf_token %}
+            {% if error %}
+            <div class="error-message">
+                <p>{{name}}- Please Enter correct date.</p>
+            </div>
+        {% endif %}
            <label for="date" >date</label>
             <input id="date" name="date" type="datetime-local" required>
             <div class="tabels">
@@ -119,11 +124,7 @@ footer {
             <button type="submit">Submit</button>
         </form>
        
-        {% if error %}
-            <div class="error-message">
-                <p>{{name}} - Selected tables are already booked.</p>
-            </div>
-        {% endif %}
+        
         <br><a href="/order_check/{{username}}" class="order_check">check orders booked</a><br><br>
         <a href="/res_tab_check/{{username}}" class="reserved_tab_check">check tabels booked</a>
     </div>

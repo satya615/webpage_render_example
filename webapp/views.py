@@ -85,6 +85,13 @@ def my_view1(request,name):
     if request.method == 'POST':
         array = request.POST.get('dataArray')
         date=request.POST.get('date')
+        current_date = datetime.now().strftime("%Y-%m-%d")
+        current_time = datetime.now().time().strftime("%H:%M")
+        current_datetime=current_date+"T"+current_time
+        if(date<current_datetime):
+            ub = booking.objects.filter(username=name)
+            a= booking.objects.values_list('num', flat=True)
+            return render(request,'res.html',{'forms':a,'tab':tab,'b':ub,'username':name,'error':'error'})
         data_list = json.loads(array)
         data=[]
         m= data_list
@@ -314,7 +321,8 @@ def tab_check(request, name):
         current_date = datetime.now().strftime("%Y-%m-%d")
         current_time = datetime.now().time().strftime("%H:%M")
         current_datetime=current_date+"T"+current_time
-        booking.objects.filter(username=name, date__lt=current_datetime).delete()
+        b=booking.objects.filter(username=name, date__lt=current_datetime).delete()
+        b.save()
         ub = booking.objects.filter(username=name)
         return render(request, 'check_tab.html', {'book': ub, 'name': name})
 
