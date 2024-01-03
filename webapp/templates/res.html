@@ -106,7 +106,7 @@ footer {
             {% csrf_token %}
             {% if error %}
             <div class="error-message">
-                <p>{{name}}- Please Enter correct date.</p>
+                <p style="color:red;"  >{{username}} - Please Enter correct date.</p>
             </div>
         {% endif %}
            <label for="date" >date</label>
