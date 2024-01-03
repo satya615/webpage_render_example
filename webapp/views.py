@@ -314,7 +314,7 @@ def tab_check(request, name):
         current_date = datetime.now().strftime("%Y-%m-%d")
         current_time = datetime.now().time().strftime("%H:%M")
         current_datetime=current_date+"T"+current_time
-        booking.objects.filter(username=name, date=current_datetime).delete()
+        booking.objects.filter(username=name, date__lt=current_datetime).delete()
         ub = booking.objects.filter(username=name)
         return render(request, 'check_tab.html', {'book': ub, 'name': name})
 
