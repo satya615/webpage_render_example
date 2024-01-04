@@ -1,5 +1,6 @@
 
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load static %}
@@ -203,38 +204,38 @@ center{
 
         @media screen and (max-width: 786px) {
     nav ul {
-        flex-direction: row;
-        gap: 12px;
-        margin-left: 25px;
-        
+        flex-direction: column;
+        gap: 9px;
+        margin-left: 0; /* Adjust as needed */
     }
 
     .logo img {
-    max-width: 170px;
-    max-height: 70px;
-}
+        max-width: 70px;
+        max-height: 70px;
+    }
 
     center {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: normal;
-    font-size: 30px;
-    color: white;
-    font-weight: bold;
-}
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: normal;
+        font-size: 20px; /* Adjust font size */
+        color: white;
+        font-weight: bold;
+        margin-left: 0; /* Adjust as needed */
+    }
 
     #hero {
         height: 300px;
     }
 
     .hero-content h1 {
-        font-size: 45px;
+        font-size: 28px; /* Adjust font size */
         margin-bottom: 10px;
     }
 
     .hero-content p {
-        font-size: 24px;
+        font-size: 16px; /* Adjust font size */
         font-weight: bold;
     }
 
@@ -244,36 +245,38 @@ center{
     }
 
     h2 {
-        font-size: 20px;
+        font-size: 18px; /* Adjust font size */
         margin-bottom: 15px;
     }
 
     p {
-        font-size: 20px;
-        line-height: 1.6;
-        
+        font-size: 16px;
+        line-height: 1.6; /* Adjust line height */
     }
+
     header {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-    height: 100px;
-}
-nav a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-    font-size:20px;
-}
-nav {
-    display: flex;
-    justify-content: normal;
-    align-items: center;
-    padding: initial;
-    height: 100px;
+        background-color: #333;
+        color: #fff;
+        padding: 10px;
+        height: auto; 
+    }
+
+    nav a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px; 
+        height: auto; 
+    }
 }
 
-}
     </style>
 </head>
 <body>
