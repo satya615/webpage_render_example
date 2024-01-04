@@ -212,8 +212,13 @@ center{
     }
 
     center {
-        margin-left: 0;
-    }
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: xx-large;
+    margin-left: 100px;
+}
 
     #hero {
         height: 300px;
@@ -248,14 +253,20 @@ center{
     background-color: #333;
     color: #fff;
     padding: 26px;
+    height: 100px;
 }
 nav a {
     color: #fff;
     text-decoration: none;
     font-weight: bold;
-    font-size: larger;
+    font-size:xx-large;
 }
-
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:20px;
+}
 }
     </style>
 </head>
