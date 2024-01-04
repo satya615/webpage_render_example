@@ -21,7 +21,7 @@ body {
 header {
     background-color: #333;
     color: #fff;
-    padding: 10px 0;
+    padding: 10px;
 }
 
 nav {
@@ -118,7 +118,7 @@ center{
     justify-content: center;
     align-items: center; 
     font-size:xx-large;
-    margin-left: 30px;
+    margin-left: 10px;
 }
 .items{
     border:2px solid black;
@@ -204,7 +204,7 @@ center{
 
         @media screen and (max-width: 786px) {
     nav ul {
-        flex-direction: column;
+        flex-direction: row;
         gap: 9px;
         margin-left: 0; /* Adjust as needed */
     }
@@ -287,10 +287,7 @@ center{
             </div>
             <center>Take It Cheesy</center>
             <ul>
-                <li onclick="login1()"><a href="#" class="high">Menu</a></li>
-                <li onclick="login()"><a href="#" class="high">Reservations</a></li>
-                <li><a href="#staff">Staff</a></li>
-                <li><a href="#contact">Contact</a></li>
+                
                 {% if log == '0' %}
                  <li><a href="/login/" class="high">Login</a></li>
                 {% else %}
