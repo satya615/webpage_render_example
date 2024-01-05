@@ -24,20 +24,20 @@ header {
     padding: 10px;
 }
 
-nav {
+nav.desk {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
 }
 
-nav ul {
+nav.desk ul {
     list-style-type: none;
     display: flex;
     gap: 20px;
 }
 
-nav a {
+nav.desk a {
     color: #fff;
     text-decoration: none;
     font-weight: bold;
@@ -94,8 +94,12 @@ section {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
    
 }
-
-
+#menuimg{
+    margin-right: 50px;
+}
+#menuim{
+    margin-right: 120px;
+}
 h2 {
     font-size: 24px;
     margin-bottom: 20px;
@@ -172,12 +176,10 @@ center{
         margin-left: 20px;
       }
 
-       .dropdown-list.show {
-    display: block; /* Display the dropdown when the "show" class is present */
-}
+      
 
         .dropdown-list {
-            background-color: rgb(253, 252, 252);
+            background-color:black;
             position: absolute;
             display: none;
             width: max-content;
@@ -208,9 +210,19 @@ center{
         .high:hover{
             color:lightsalmon;
         }
+        
+        nav.Mobile{
+            display:none;
+        }
 
         @media screen and (max-width: 786px) {
-    nav ul {
+
+            nav.desk{
+                display:none;
+            }
+    nav.Mobile ul {
+        list-style-type: none;
+        display: flex;
         flex-direction: row;
         gap: 9px;
         margin-left: 0; /* Adjust as needed */
@@ -271,27 +283,39 @@ center{
         height: auto; 
     }
 
-    nav a {
+    nav.Mobile a {
+        
         color: #fff;
         text-decoration: none;
         font-weight: bold;
         font-size: 20px;
     }
 
-    nav {
+    nav.Mobile {
         display: flex;
-        justify-content: space-between;
+        justify-content:space-evenly;
+        flex-direction: row;
         align-items: center;
         padding: 10px; 
         height: auto; 
+        list-style: none;
     }
+    nav.Mobile.login{
+        display: flex;
+        justify-content: flex-end;
+    }
+    nav.Mobile.head{
+        display: flex;
+        justify-content: center;
+    }
+    
 }
 
     </style>
 </head>
 <body>
     <header>
-        <nav>
+        <nav class="Mobile">
             <div class="logo">
                 <img src="{% static 'logo.jpg' %}" alt="Restaurant Logo">
             </div>
@@ -301,18 +325,45 @@ center{
                 {% if log == '0' %}
                  <li><a href="/login/" class="high">Login</a></li>
                 {% else %}
-                <li class="dropdown"><img src="{% static 'list.png' %}" width="26px" height="25px" style="cursor: pointer;" ></div>
-                    <div class="dropdown-list">
-                      <a onclick="login1()" class="high">Menu</a>
-                      <a onclick="login()" class="high">Reservations</a>
-                  </div></li>
                 
-                <li class="dropdown"><a href="#" class="nor"> {{name.username}}</a>
+                <li class="dropdown">
+                    <a href="#" id="menuimg">Menu</a>
+                    <div class="dropdown-list">
+                        <a href="/menu/{{name.username}}" class="high">Items</a>
+                        <a href="/res/{{name.username}}" class="high">Reservation</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#" id="menuimg">Loggedin</a>
+                    <div class="dropdown-list">
+                        <a href="/home/" class="high">Logout</a>
+                        <a href="#" class="high">Profile</a>
+                    </div>
+                </li>
+                
+                 {% endif %}
+
+            </ul>
+        </nav>
+        <nav class="desk">
+            <div class="logo">
+                <img src="{% static 'logo.jpg' %}" alt="Restaurant Logo">
+            </div>
+            <center>Take It Cheesy</center>
+            <ul>
+                <li onclick="login1()"><a href="#" class="high">Menu</a></li>
+                <li onclick="login()"><a href="#" class="high">Reservations</a></li>
+                <li><a href="#staff">Staff</a></li>
+                <li><a href="#contact">Contact</a></li>
+                {% if log == '0' %}
+                 <li><a href="/login/" class="high">Login</a></li>
+                {% else %}
+                
+                <li class="dropdown"><a href="#"> {{name.username}}</a>
                 <div class="dropdown-list">
                     <a href="/home/">Logout</a>
                     <a href="#">Profile</a>
                 </div>  </li>
-                
                  {% endif %}
 
             </ul>
@@ -359,11 +410,7 @@ center{
     </section>
     <script>
         
-    function toggleDropdown(img) {
-        console.log("Dropdown clicked!");
-        var dropdownList = img.nextElementSibling;
-        dropdownList.classList.toggle("show");
-    }
+    
    
         let log="{{log}}"
         function login(){
