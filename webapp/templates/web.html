@@ -168,6 +168,13 @@ center{
         .dropdown {
             position: relative;
         }
+      .nor{
+        margin-left: 20px;
+      }
+
+       .dropdown-list.show {
+    display: block; /* Display the dropdown when the "show" class is present */
+}
 
         .dropdown-list {
             background-color: rgb(253, 252, 252);
@@ -224,6 +231,9 @@ center{
         font-weight: bold;
         margin-left: 0; /* Adjust as needed */
     }
+    .nor{
+        margin-left: 20px;
+      }
 
     #hero {
         height: 300px;
@@ -291,12 +301,18 @@ center{
                 {% if log == '0' %}
                  <li><a href="/login/" class="high">Login</a></li>
                 {% else %}
+                <li class="dropdown"><img src="{% static 'list.png' %}" width="26px" height="25px" style="cursor: pointer;" ></div>
+                    <div class="dropdown-list">
+                      <a onclick="login1()" class="high">Menu</a>
+                      <a onclick="login()" class="high">Reservations</a>
+                  </div></li>
                 
-                <li class="dropdown"><a href="#"> {{name.username}}</a>
+                <li class="dropdown"><a href="#" class="nor"> {{name.username}}</a>
                 <div class="dropdown-list">
                     <a href="/home/">Logout</a>
                     <a href="#">Profile</a>
                 </div>  </li>
+                
                  {% endif %}
 
             </ul>
@@ -342,6 +358,13 @@ center{
         </address>
     </section>
     <script>
+        
+    function toggleDropdown(img) {
+        console.log("Dropdown clicked!");
+        var dropdownList = img.nextElementSibling;
+        dropdownList.classList.toggle("show");
+    }
+   
         let log="{{log}}"
         function login(){
             if(log=='0'){
