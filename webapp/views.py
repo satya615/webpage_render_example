@@ -80,7 +80,7 @@ import json  #reservation
 from collections import Counter
 def my_view1(request,name):
     tab=[]
-    for i in range(1,50):
+    for i in range(1,100):
         tab.append(i)  
     if request.method == 'POST':
         array = request.POST.get('dataArray')
