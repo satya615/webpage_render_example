@@ -22,3 +22,6 @@ class Order(models.Model):
     price=models.CharField(max_length=100)
     count=models.IntegerField()
     status=models.CharField(max_length=100)
+class Logindetails(models.Model):
+    username=models.CharField(max_length=100)
+    Date=models.DateTimeField()
