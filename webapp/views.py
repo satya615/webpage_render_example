@@ -117,6 +117,12 @@ def my_view1(request,name):
         a= booking.objects.values_list('num', flat=True)
         return render(request,'res.html',{'forms':a,'tab':tab,'b':ub,'username':name})
     else:
+        current_date = datetime.now().strftime("%Y-%m-%d")
+        current_time = datetime.now().time().strftime("%H:%M")
+        current_datetime=current_date+"T"+current_time
+        b=booking.objects.filter(username=name, date__lt=current_datetime).delete()
+        ub = booking.objects.filter(username=name)
+        # return render(request, 'check_tab.html', {'book': ub, 'name': name})
         ub = booking.objects.filter(username=name)
         a= booking.objects.values_list('num', flat=True)
         return render(request,'res.html',{'forms':a,'tab':tab,'b':ub,'username':name})
