@@ -25,3 +25,4 @@ class Order(models.Model):
 class Logindetails(models.Model):
     username=models.CharField(max_length=100)
     Date=models.DateTimeField()
+    width=models.CharField(max_length=100)

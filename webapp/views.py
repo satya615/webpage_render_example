@@ -51,7 +51,7 @@ from django.contrib.auth.hashers import make_password, check_password
 #         form = log_in()
 #     return render(request, 'login.html', {'form': form})
 from datetime import datetime as d
-def login(request):
+def login(request,width):
     if request.method == 'POST':
         form = Loginform(request.POST)
         if form.is_valid():
@@ -62,7 +62,7 @@ def login(request):
                if(a.password==password):
                  c=datetime.utcnow()
                  current_date = c.strftime("%Y-%m-%d %H:%M:%S")
-                 Logindetails.objects.create(username=name,Date=current_date)
+                 Logindetails.objects.create(username=name,Date=current_date,width=width)
                  return render(request,'web.html',{'log':'1','name':a})
                else:
                 form = Loginform()

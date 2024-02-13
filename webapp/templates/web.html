@@ -356,7 +356,8 @@ center{
                 <li><a href="#staff">Staff</a></li>
                 <li><a href="#contact">Contact</a></li>
                 {% if log == '0' %}
-                 <li><a href="/login/" class="high">Login</a></li>
+                
+                 <li onclick="newfunc()"><a href="#" class="high">Login</a></li>
                 {% else %}
                 
                 <li class="dropdown"><a href="#"> {{name.username}}</a>
@@ -412,6 +413,13 @@ center{
         
     
    
+        function newfunc() {
+        var screenWidth = window.innerWidth;
+        let a = screenWidth;
+        b="/login/"+a+"/";
+        window.location.href = b;
+}
+
         let log="{{log}}"
         function login(){
             if(log=='0'){
