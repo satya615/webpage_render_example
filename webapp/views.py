@@ -17,7 +17,8 @@ def singup(request):
                    return render(request,'signup.html',{'error':error,'form':form})
             except ObjectDoesNotExist:
                 form.save()
-                return render(request,'login.html')
+                form = Loginform()
+                return render(request,'login.html', {'form': form})
     else:
         form = Loginform()
     return render(request, 'signup.html', {'form': form})
