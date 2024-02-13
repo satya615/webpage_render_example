@@ -17,8 +17,6 @@ def singup(request):
                    return render(request,'signup.html',{'error':error,'form':form})
             except ObjectDoesNotExist:
                 form.save()
-                form = Loginform()
-                return render(request,'login.html', {'form': form})
     else:
         form = Loginform()
     return render(request, 'signup.html', {'form': form})
@@ -52,7 +50,7 @@ from django.contrib.auth.hashers import make_password, check_password
 #     else:
 #         form = log_in()
 #     return render(request, 'login.html', {'form': form})
-from datetime import datetime as d
+from datetime import datetime 
 def login(request,width):
     if request.method == 'POST':
         form = Loginform(request.POST)
